@@ -8,11 +8,37 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+    <mwl-demo-utils-calendar-header
+      [(view)]="view"
+      [(viewDate)]="viewDate">
+    </mwl-demo-utils-calendar-header>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <div class="alert alert-info">
+      <div [ngSwitch]="view">
+        <span *ngSwitchCase="'month'">Click on a month label to change the view to that month.</span>
+        <span *ngSwitchCase="'week'">Click on a day header to change the view to that day.</span>
+        <span *ngSwitchCase="'day'">There is no other view to navigate to.</span>
+      </div>
+    </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <div [ngSwitch]="view">
+      <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (dayClicked)="viewDate = $event.day.date; view = 'day'">
+      </mwl-calendar-month-view>
+      <mwl-calendar-week-view
+        *ngSwitchCase="'week'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view
+        *ngSwitchCase="'day'"
+        [viewDate]="viewDate"
+        [events]="events">
+      </mwl-calendar-day-view>
+    </div>
+    
 </ion-content>
