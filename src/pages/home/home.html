@@ -10,6 +10,7 @@
 <ion-content padding>
     <mwl-demo-utils-calendar-header
       [(view)]="view"
+      [locale]="locale"
       [(viewDate)]="viewDate">
     </mwl-demo-utils-calendar-header>
 
@@ -26,16 +27,23 @@
         *ngSwitchCase="'month'"
         [viewDate]="viewDate"
         [events]="events"
+        [locale]="locale"
+        [weekStartsOn]="weekStartsOn"
+        [weekendDays]="weekendDays"
         (dayClicked)="viewDate = $event.day.date; view = 'day'">
       </mwl-calendar-month-view>
       <mwl-calendar-week-view
         *ngSwitchCase="'week'"
         [viewDate]="viewDate"
         [events]="events"
+        [locale]="locale"
+        [weekStartsOn]="weekStartsOn"
+        [weekendDays]="weekendDays"
         (dayHeaderClicked)="viewDate = $event.day.date; view = 'day'">
       </mwl-calendar-week-view>
       <mwl-calendar-day-view
         *ngSwitchCase="'day'"
+        [locale]="locale"
         [viewDate]="viewDate"
         [events]="events">
       </mwl-calendar-day-view>
